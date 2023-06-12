@@ -26,8 +26,6 @@ const createAirtableRecord = async (fields, platform) => {
         },
       }
     );
-    console.log("record created");
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.log(error);

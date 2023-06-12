@@ -18,7 +18,6 @@ app.get("/meta_comments", async (req, res) => {
 
 app.post("/meta_comments", async (req, res) => {
   try {
-    console.log(req.body.entry[0].changes[0].value.message);
     if (req.body.entry[0].changes[0].value.comment_id) {
       if (req.body.entry[0].changes[0].value.message.length == 0) {
         return;
@@ -62,7 +61,6 @@ app.post("/instagram_comments", async (req, res) => {
       req.body.entry[0].changes[0].field === "comments"
     ) {
       if(req.body.entry[0].changes[0].value.text.length == 0) {return}
-      console.log(req.body);
       const date = new Date(req.body.entry[0].time * 1000);
       const createdAt = date.toISOString();
       const comment = {
@@ -74,7 +72,6 @@ app.post("/instagram_comments", async (req, res) => {
         "Created At": createdAt,
       };
       createInstagramComment(comment);
-      console.log(comment);
     }
   } catch (error) {
     console.log("instagram webhook error", error);
@@ -83,5 +80,4 @@ app.post("/instagram_comments", async (req, res) => {
 
 app.listen(PORT, async () => {
   console.log(`App is running on port ${PORT}`);
-  console.log(process.env.airtableAccessToken)
 });
